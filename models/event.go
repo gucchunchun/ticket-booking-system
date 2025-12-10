@@ -17,7 +17,7 @@ type Event struct {
 type EventRepository interface {
 	GetMany(ctx context.Context) ([]*Event, error)
 	GetOne(ctx context.Context, id uint) (*Event, error)
-	CreateOne(ctx context.Context, event *Event) error
-	// Update(ctx context.Context, event *Event) error
-	// Delete(ctx context.Context, id uint) error
+	CreateOne(ctx context.Context, event *Event) (*Event, error)
+	UpdateOne(ctx context.Context, id uint, updateData map[string]interface{}) (*Event, error)
+	DeleteOne(ctx context.Context, id uint) error
 }
