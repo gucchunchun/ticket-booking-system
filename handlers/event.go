@@ -77,7 +77,11 @@ func (h *EventHandler) CreateOne(ctx *fiber.Ctx) error {
 			"data":    createdEvent,
 		})
 	}
-	return nil
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status":  "success",
+		"message": "Event created successfully",
+		"data":    createdEvent,
+	})
 }
 func (h *EventHandler) UpdateOne(ctx *fiber.Ctx) error {
 	id, err := ctx.ParamsInt("eventId")
@@ -108,7 +112,12 @@ func (h *EventHandler) UpdateOne(ctx *fiber.Ctx) error {
 			"data":    updatedEvent,
 		})
 	}
-	return nil
+
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status":  "success",
+		"message": "Event updated successfully",
+		"data":    updatedEvent,
+	})
 }
 
 func (h *EventHandler) DeleteOne(ctx *fiber.Ctx) error {
