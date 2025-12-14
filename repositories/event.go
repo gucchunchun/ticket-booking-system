@@ -46,17 +46,13 @@ func (r *EventRepository) CreateOne(ctx context.Context, event *models.Event) (*
 }
 
 func (r *EventRepository) UpdateOne(ctx context.Context, id uint, updateData map[string]interface{}) (*models.Event, error) {
-	event := &models.Event{}
-
 	res := r.db.Model(&models.Event{}).Where("id = ?", id).Updates(updateData)
 
 	if res.Error != nil {
 		return nil, res.Error
 	}
 
-	r.db.Model(&models.Event{}).First(event, id)
-
-	return event, nil
+	return r.GetOne(ctx, id)
 }
 
 func (r *EventRepository) DeleteOne(ctx context.Context, id uint) error {
